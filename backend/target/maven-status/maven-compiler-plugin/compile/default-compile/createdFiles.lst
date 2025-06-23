@@ -1,0 +1,12 @@
+com\zidio\controller\AuthController.class
+com\zidio\entity\User.class
+com\zidio\dto\LoginRequest.class
+com\zidio\service\UserService.class
+com\zidio\dto\RegisterRequest.class
+com\zidio\service\JwtService.class
+com\zidio\entity\Recruiter.class
+com\zidio\entity\Application.class
+com\zidio\entity\Job.class
+com\zidio\entity\ApplicationStatus.class
+com\zidio\repository\UserRepository.class
+com\zidio\entity\Student.class
