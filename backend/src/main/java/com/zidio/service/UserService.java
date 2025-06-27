@@ -57,9 +57,6 @@ public class UserService implements UserDetailsService {
     public User getUserByEmail(String email) {
         logger.info("Fetching user by email: {}", email);
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> {
-                    logger.warn("User not found with email: {}", email);
-                    return new UsernameNotFoundException("User not found: " + email);
-                });
+                .orElse(null);
     }
 }

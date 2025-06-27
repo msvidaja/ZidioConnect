@@ -25,4 +25,10 @@ public class User {
 
     @Column(nullable = false)
     private String name;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Student student;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Recruiter recruiter;
 }

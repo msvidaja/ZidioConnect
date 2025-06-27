@@ -1,10 +1,16 @@
 package com.zidio.dto;
 
-public record StudentRequest(
-        String name,
-        String email,
-        String university,
-        String major,
-        Double gpa,
-        String resumeUrl
-) {}
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class StudentRequest {
+    private String name;
+    private String email;
+    private String course;
+    private String university;
+    private String major;
+    private Double gpa;
+    private String resumeUrl;
+}

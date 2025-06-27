@@ -1,11 +1,17 @@
 package com.zidio.dto;
 
-import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
-public record JobRequest(
-        String title,
-        String description,
-        String jobType,
-        String location,
-        LocalDateTime datePosted
-) {}
+import java.time.LocalDate;
+
+@Getter
+@Setter
+public class JobRequest {
+    private Long id;
+    private String title;
+    private String description;
+    private String jobType;
+    private String location;
+    private LocalDate datePosted;
+}

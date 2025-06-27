@@ -28,13 +28,15 @@ public class Job {
     private String location;
     private LocalDate datePosted;
 
-    @Column(nullable = false)
-    private String recruiterEmail;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recruiter_id", nullable = false)
     private Recruiter recruiter;
 
     @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
     private List<Application> applications = new ArrayList<>();
+
+    // Helper method to get recruiter email
+    public String getRecruiterEmail() {
+        return recruiter != null ? recruiter.getRecruiterEmail() : null;
+    }
 }

@@ -1,10 +1,12 @@
 package com.zidio.dto;
 
-import com.zidio.entity.Job;
-import com.zidio.entity.Student;
+import lombok.Getter;
+import lombok.Setter;
 
-public record ApplicationRequest(
-        Student student,
-        Job job,
-        String coverLetter
-) {}
+@Getter
+@Setter
+public class ApplicationRequest {
+    private Long student; // or StudentRequest student if you want nested
+    private Long job;     // or JobRequest job if you want nested
+    private String coverLetter;
+}

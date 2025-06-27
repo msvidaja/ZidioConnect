@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Collections;
+import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -48,19 +49,28 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequest request) {
         System.out.println("Attempting login for email: " + request.email() + ", password: " + request.password());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.email(), request.password()));
         if (authentication.isAuthenticated()) {
             System.out.println("Authentication successful for: " + request.email());
-            String token = jwtService.generateToken(request.email(), userService.getUserByEmail(request.email()).getRole());
-            Map<String, String> response = new HashMap<>();
+            User user = userService.getUserByEmail(request.email());
+            String token = jwtService.generateToken(request.email(), user.getRole());
+            
+            Map<String, Object> response = new HashMap<>();
             response.put("token", token);
+            response.put("user", Map.of(
+                "email", user.getEmail(),
+                "name", user.getName(),
+                "role", user.getRole()
+            ));
+            
             return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Invalid credentials"));
         }
-        System.out.println("Authentication failed for: " + request.email());
-        return ResponseEntity.status(401).body(Collections.singletonMap("error", "Invalid credentials"));
     }
 
     @GetMapping("/validate")
