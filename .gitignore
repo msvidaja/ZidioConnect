@@ -35,4 +35,8 @@ yarn-error.log*
 
 # Frontend Vite
 frontend/frontend/node_modules/
-frontend/frontend/dist/ 
+frontend/frontend/dist/
+
+# BFG Repo-Cleaner files
+banned.txt
+ZIDIOConnect.git/ 
